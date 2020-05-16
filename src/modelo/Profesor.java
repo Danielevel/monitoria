@@ -124,7 +124,7 @@ public class Profesor {
         this.direccionP = direccionP;
     }
     
-    public boolean insertEstudiante(Profesor obE, FileInputStream fis, File f) throws SQLException {
+    public boolean insertProfesor(Profesor obE, FileInputStream fis, File f) throws SQLException {
 
         boolean t = false;
         PreparedStatement ps = null;
@@ -164,6 +164,10 @@ public class Profesor {
 
         return t;
 
+    }
+
+    public boolean insertProfesor(Profesor get) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
