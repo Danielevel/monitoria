@@ -5,18 +5,22 @@
  */
 package modelo;
 
-import clases.ConnectDB;
+import control.ConnectDB;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  *
  * @author User
  */
 public class Profesor {
-    
+
     String codigoP;
     String nombreP1;
     String nombreP2;
@@ -29,6 +33,16 @@ public class Profesor {
     String direccionP;
 
     public Profesor() {
+    }
+
+    public Profesor(String codigoP, String nombreP1, String apellidoP1, String telefonoP1, String correoP, String contraseñaP, String direccionP) {
+        this.codigoP = codigoP;
+        this.nombreP1 = nombreP1;
+        this.apellidoP1 = apellidoP1;
+        this.telefonoP1 = telefonoP1;
+        this.correoP = correoP;
+        this.contraseñaP = contraseñaP;
+        this.direccionP = direccionP;
     }
 
     public Profesor(String codigoP, String nombreP1, String nombreP2, String apellidoP1, String apellidoP2, String telefonoP1, String telefonoP2, String correoP, String contraseñaP, String direccionP) {
@@ -123,9 +137,9 @@ public class Profesor {
     public void setDireccionP(String direccionP) {
         this.direccionP = direccionP;
     }
-    
-    public boolean insertProfesor(Profesor obE, FileInputStream fis, File f) throws SQLException {
 
+    public boolean insertProfesor(Profesor obE) throws SQLException {
+        System.out.println("Llego a insertar");
         boolean t = false;
         PreparedStatement ps = null;
         ConnectDB objC = new ConnectDB();
@@ -139,12 +153,13 @@ public class Profesor {
                 ps.setString(2, obE.getNombreP1());
                 ps.setString(3, obE.getNombreP2());
                 ps.setString(4, obE.getApellidoP1());
-                ps.setString(5, obE.getTelefonoP1());
-                ps.setString(6, obE.getTelefonoP2());
-                ps.setString(7, obE.getCorreoP());
-                ps.setString(8, obE.getContraseñaP());
-                ps.setString(9, obE.getDireccionP());
-              
+                ps.setString(5, obE.getApellidoP2());
+                ps.setString(6, obE.getTelefonoP1());
+                ps.setString(7, obE.getTelefonoP2());
+                ps.setString(8, obE.getCorreoP());
+                ps.setString(9, obE.getContraseñaP());
+                ps.setString(10, obE.getDireccionP());
+
                 ps.executeUpdate();
                 objC.getConexion().commit();
                 t = true;
@@ -155,19 +170,87 @@ public class Profesor {
         } finally {
             try {
                 ps.close();
-                fis.close();
             } catch (Exception ex) {
 
                 System.out.println("Error " + ex.toString());
             }
         }
-
         return t;
 
     }
 
-    public boolean insertProfesor(Profesor get) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public LinkedList<Profesor> ejecutarSQLSelectProfesor(String sql) {
+
+        ResultSet rs;
+        String codigoPx;
+        String nombreP1x;
+        String nombreP2x;
+        String apellidoP1x;
+        String apellidoP2x;
+        String telefonoP1x;
+        String telefonoP2x;
+        String correoPx;
+        String contraseñaPx;
+        String direccionPx;
+
+        ConnectDB objc = new ConnectDB();
+        LinkedList<Profesor> ma = new LinkedList<>();
+        try {
+            if (objc.crearConexion()) {
+                Statement sentencia = objc.getConexion().createStatement();
+                rs = sentencia.executeQuery(sql);
+                while (rs.next()) {
+
+                    codigoPx = rs.getNString("codigoP");
+                    nombreP1x = rs.getNString("nombreP1");
+                    nombreP2x = rs.getNString("nombreP2");
+                    apellidoP1x = rs.getNString("apellidoP1");
+                    apellidoP2x = rs.getNString("apellidoP2");
+                    telefonoP1x = rs.getNString("telefonoP1");
+                    telefonoP2x = rs.getNString("telefonoP2");
+                    correoPx = rs.getNString("correoP");
+                    contraseñaPx = rs.getNString("contraseñaP");
+                    direccionPx = rs.getNString("direccionP");
+
+                    ma.add(new Profesor(codigoPx, nombreP1x, nombreP2x, apellidoP1x, apellidoP2x, telefonoP1x, telefonoP2x, correoPx, contraseñaPx, direccionPx));
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        return ma;
+
     }
     
+    
+    public HashMap<String,String> getRestauranteCombo() {
+        HashMap<String, String> map = new HashMap<String, String>();
+        PreparedStatement ps = null;
+        ConnectDB objC = new ConnectDB();
+        ResultSet rs;
+        try {
+            if (objC.crearConexion()) {
+                String sql = "SELECT codigo , nombreP1, apellidoP1  FROM monitorias.profesores";
+
+                ps = objC.getConexion().prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                Profesor profesor;
+
+                while (rs.next()) {
+                    profesor= new Profesor();
+                    profesor.setCodigoP(rs.getString(1));
+                    profesor.setNombreP1(rs.getNString(2));
+                    
+                    map.put(profesor.getNombreP1(), profesor.getCodigoP());
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error cargando lista de Restaurantes");
+        }
+        return map;
+    }
+
 }
