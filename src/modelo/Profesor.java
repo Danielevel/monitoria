@@ -226,14 +226,14 @@ public class Profesor {
     }
     
     
-    public HashMap<String,String> getRestauranteCombo() {
+    public HashMap<String,String> getProfesorCombo() {
         HashMap<String, String> map = new HashMap<String, String>();
         PreparedStatement ps = null;
         ConnectDB objC = new ConnectDB();
         ResultSet rs;
         try {
             if (objC.crearConexion()) {
-                String sql = "SELECT codigo , nombreP1, apellidoP1  FROM monitorias.profesores";
+                String sql = "SELECT codigo , nombreP1  FROM monitorias.profesores";
 
                 ps = objC.getConexion().prepareStatement(sql);
                 rs = ps.executeQuery(sql);
