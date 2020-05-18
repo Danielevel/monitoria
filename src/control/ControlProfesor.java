@@ -20,7 +20,7 @@ import modelo.Profesor;
  */
 public class ControlProfesor {
 
-    public boolean insertProfesor(LinkedList<Profesor> LProfesores) {
+    public boolean insertProfesor(LinkedList<Profesor> LProfesores)  {
         boolean t = false;
         // FileInputStream fis=null;
         Profesor objP = new Profesor();
@@ -43,6 +43,10 @@ public class ControlProfesor {
 
         return ma;
 
+    }
+
+    public boolean insertProfesor(String string, LinkedList<Profesor> listaP) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
