@@ -28,7 +28,7 @@ public class Estudiante {
     private String contraseñaE;
     private String direccionE;
     private String idProgramaF;
-
+    private String uno;
     public Estudiante() {
     }
 
