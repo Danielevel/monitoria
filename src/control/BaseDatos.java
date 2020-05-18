@@ -33,7 +33,9 @@ public class BaseDatos {
     public Connection getConexion() {
         return conexion;
     }
-
+public Statement getSt() {
+        return st;
+    }
     /**
      * Método utilizado para establecer la conexión con la base de datos
      *
