@@ -226,6 +226,8 @@ public class Profesor {
 
     }
 
+    
+    // ATENCION!!! ejecutarSQLSelectProfesor ya no funciona, ahora es ListraProfesores
     public LinkedList<Profesor> ejecutarSQLSelectProfesor(String sql) {
 
         ResultSet rs;
@@ -333,4 +335,43 @@ public class Profesor {
         
     }
 
+    public LinkedList<Profesor> ListraProfesores(String sql) throws SQLException {
+        LinkedList<Profesor> lp = new LinkedList<>();
+        BaseDatos objb = new BaseDatos();
+        String codigoP0="";
+        String nombreP10="";
+        String nombreP20="";
+        String apellidoP10="";
+        String apellidoP20="";
+        String telefonoP10="";
+        String telefonoP20="";
+        String correoP0="";
+        String contraseñaP0="";
+        String direccionP0="";
+        
+        ResultSet rs = null;
+        if (objb.crearConexion()){
+            try{
+                rs = objb.getSt().executeQuery(sql);
+                    while(rs.next()){
+                        
+                        codigoP0=rs.getString("codigoP");
+                        nombreP10=rs.getString("nombreP1");
+                        nombreP20=rs.getString("nombreP2");
+                        apellidoP10=rs.getString("apellidoP1");
+                        apellidoP20=rs.getString("apellidoP2");
+                        telefonoP10=rs.getString("telefonoP1");
+                        telefonoP20=rs.getString("telefonoP2");
+                        correoP0=rs.getString("correoP");
+                        contraseñaP0=rs.getString("contraseñaP");
+                        direccionP0=rs.getString("direccionP");
+                        
+                        lp.add(new Profesor(codigoP0,nombreP10,nombreP20,apellidoP10,apellidoP20,telefonoP10,telefonoP20,correoP0,contraseñaP0,direccionP0));
+                    }
+            }catch (SQLException ex){
+                    Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE,null, ex);
+                    }
+        }
+        return lp;
+    }
 }
