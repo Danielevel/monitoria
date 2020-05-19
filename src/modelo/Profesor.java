@@ -324,7 +324,7 @@ public class Profesor {
                 objC.getConexion().commit();
                 t = true;
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
             t = false;
         }

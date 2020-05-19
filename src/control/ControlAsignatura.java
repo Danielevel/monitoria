@@ -5,6 +5,7 @@
  */
 package control;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 import modelo.Asignaturas;
 
@@ -27,6 +28,16 @@ public class ControlAsignatura {
         
         return t;
         
+    }
+
+    public LinkedList<Asignaturas> consultarAsignaturas() throws SQLException {
+
+        LinkedList<Asignaturas> la= new LinkedList<>();
+        String sql="select * from asignaturas";
+        Asignaturas obja = new Asignaturas();
+        la=obja.getrAsignaturasCombo(sql);
+        
+        return la;
     }
     
 }

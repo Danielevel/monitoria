@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/control/BaseDatos.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/modelo/Asignaturas.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/monitoria/Monitoria.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/vista/vistaProfesor.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/modelo/Curso.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/vista/VistaCurso.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/control/ConnectDB.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/vista/VistaAsignatura.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/modelo/Profesor.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/control/ControlAsignatura.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/control/ControlEstudiante.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/vista/VistaEstudiante.java</file>
+            <file>file:/C:/Users/HEWLETT%20PACKARD/Documents/NetBeansProjects/monitoria/src/control/ControlProfesor.java</file>
+        </group>
     </open-files>
 </project-private>
