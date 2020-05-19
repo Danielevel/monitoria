@@ -5,6 +5,10 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author HEWLETT PACKARD
@@ -26,8 +30,10 @@ public class Curso {
         this.codigoPFCU = codigoPFCU;
     }
 
-    public Curso(String nombreCur) {
+    public Curso(String nombreCur, int idAsigFCU, String codigoPFCU) {
         this.nombreCur = nombreCur;
+        this.idAsigFCU = idAsigFCU;
+        this.codigoPFCU = codigoPFCU;
     }
     
     
@@ -108,5 +114,22 @@ public class Curso {
     public void setIdcurso(int idcurso) {
         this.idcurso = idcurso;
     }
+    
+    public boolean insertarCurso(String sql) {
+        boolean t = false;
+        BaseDatos objCon = new BaseDatos();
+        if(objCon.crearConexion()){
+            try{
+                Statement sentencia;
+                sentencia = objCon.getConexion().createStatement();
+                sentencia.executeUpdate(sql);
+                t=true;
+            }catch (SQLException ex){
+                t=false;
+            }
+        }
+        return t;
+    }
+    
 
 }
