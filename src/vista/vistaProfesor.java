@@ -286,6 +286,7 @@ public class vistaProfesor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ControlProfesor objpt = new ControlProfesor();
         String codigo = Tcodigo.getText();
         String nombre1 = Tnombre1.getText();
         String nombre2 = Tnombre2.getText();
@@ -298,7 +299,7 @@ public class vistaProfesor extends javax.swing.JFrame {
         String direccion = Tdireccion.getText();
         
         objP = new Profesor(codigo, nombre1, nombre2, apellido1, apellido2, Telefono1, Telefono2, correo, contraseña, direccion);
-        listaP.add(objP);
+        boolean t = objpt.insertarProfesor(objP);
         
         JOptionPane.showMessageDialog(rootPane, "Se agrego el profesor ");
        
@@ -307,17 +308,7 @@ public class vistaProfesor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         boolean insertar = false;
-         ControlProfesor cp = new ControlProfesor();
          
-         JOptionPane.showMessageDialog(null, listaP);
-         insertar = cp.insertProfesor(listaP);
-        
-         if (insertar) {
-            JOptionPane.showMessageDialog(rootPane, "Se han insertado los profesores");
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "No se pudo insertar");
-        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

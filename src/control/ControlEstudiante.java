@@ -18,7 +18,7 @@ public class ControlEstudiante {
     public static boolean insertEstudante(LinkedList<Estudiante> le) {
         boolean t= false;
         String sql="";
-        sql="insert into estudiantes (codigoE,nombreE1, nombreE2, apellidoE1, apellidoE2, telefonoE1, telefonoE2, correoE, contraseñaE, direccionE) values (?,?,?,?,?,?,?,?,?,?);";
+        sql="insert into estudiantes  values (?,?,?,?,?,?,?,?,?,?);";
         Estudiante obje= new Estudiante();
         
         t = obje.insertEstudiante(sql,le); 
@@ -35,7 +35,7 @@ public class ControlEstudiante {
     public boolean insertarEstudiante(Estudiante objt) {
         boolean t = false;
         String sql = "";
-         sql="insert into estudiantes (codigoE,nombreE1, nombreE2, apellidoE1, apellidoE2, telefonoE1, telefonoE2, correoE, contraseñaE, direccionE,idProgramaF) values (?,?,?,?,?,?,?,?,?,?,?);";
+         sql="insert into estudiantes  values (?,?,?,?,?,?,?,?,?,?,?);";
         Estudiante objp2 = new Estudiante();
         t = objp2.insertarEstudiante(objt, sql);
         return t;

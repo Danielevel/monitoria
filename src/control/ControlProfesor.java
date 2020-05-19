@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import modelo.Profesor;
 
 /**
@@ -20,18 +21,29 @@ import modelo.Profesor;
  */
 public class ControlProfesor {
 
-    public boolean insertProfesor(LinkedList<Profesor> LProfesores)  {
+    public static boolean InsertarProfesor(LinkedList<Profesor> Lp) {
+        boolean t= false;
+        String sql="";
+        sql="insert into profesores  values (?,?,?,?,?,?,?,?,?,?);";
+        Profesor objP= new Profesor();
+        
+        t = objP.insertProfesor(sql, objP);
+        
+        
+        
+        
+        
+        return t ;
+    }
+    
+    public boolean insertarProfesor(Profesor objP) {
         boolean t = false;
-        // FileInputStream fis=null;
-        Profesor objP = new Profesor();
-        for (int i = 0; i < LProfesores.size(); i++) {
-            try {
-                t = objP.insertProfesor(LProfesores.get(i));
-            } catch (SQLException ex) {
-                Logger.getLogger(ControlProfesor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        String sql = "";
+         sql="insert into profesores  values (?,?,?,?,?,?,?,?,?,?);";
+        Profesor objp2 = new Profesor();
+        t = objp2.insertProfesor(sql, objP);
         return t;
+        
     }
 
     public LinkedList<Profesor> consultarProfesor() {
@@ -45,8 +57,6 @@ public class ControlProfesor {
 
     }
 
-    public boolean insertProfesor(String string, LinkedList<Profesor> listaP) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
 }

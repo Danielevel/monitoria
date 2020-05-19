@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import control.BaseDatos;
 import control.ConnectDB;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -136,14 +139,20 @@ public class Profesor {
 
     public void setDireccionP(String direccionP) {
         this.direccionP = direccionP;
+
     }
 
-    public boolean insertProfesor(Profesor obE) throws SQLException {
-        System.out.println("Llego a insertar");
+    @Override
+    public String toString() {
+        return "Profesor{" + "codigoP=" + codigoP + ", nombreP1=" + nombreP1 + ", nombreP2=" + nombreP2 + ", apellidoP1=" + apellidoP1 + ", apellidoP2=" + apellidoP2 + ", telefonoP1=" + telefonoP1 + ", telefonoP2=" + telefonoP2 + ", correoP=" + correoP + ", contrase\u00f1aP=" + contraseñaP + ", direccionP=" + direccionP + '}';
+    }
+
+    public boolean insertProfesor(String sql, Profesor obE) {
+
         boolean t = false;
         PreparedStatement ps = null;
         ConnectDB objC = new ConnectDB();
-        String sql = "insert into Estudiantes values(?,?,?,?,?,?,?,?,?,?)";
+
         try {
             if (objC.crearConexion()) {
                 objC.getConexion().setAutoCommit(false);
@@ -165,15 +174,53 @@ public class Profesor {
                 t = true;
             }
         } catch (Exception ex) {
+            Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
             t = false;
-            System.out.println("Error " + ex.toString());
-        } finally {
-            try {
-                ps.close();
-            } catch (Exception ex) {
+        }
 
-                System.out.println("Error " + ex.toString());
+        return t;
+
+    }
+
+    public boolean insertProfesor(String sql, LinkedList<Profesor> lp) {
+
+        boolean t = false;
+        PreparedStatement ps = null;
+        ConnectDB objC = new ConnectDB();
+        for (int i = 0; i < lp.size(); i++) {
+            try {
+                if (objC.crearConexion()) {
+                    objC.getConexion().setAutoCommit(false);
+
+                    ps = objC.getConexion().prepareStatement(sql);
+                    ps.setString(1, lp.get(i).codigoP);
+                    ps.setString(2, lp.get(i).nombreP1);
+                    ps.setString(3, lp.get(i).nombreP2);
+                    ps.setString(4, lp.get(i).apellidoP1);
+                    ps.setString(5, lp.get(i).apellidoP2);
+                    ps.setString(6, lp.get(i).telefonoP1);
+                    ps.setString(7, lp.get(i).telefonoP2);
+                    ps.setString(8, lp.get(i).correoP);
+                    ps.setString(9, lp.get(i).contraseñaP);
+                    ps.setString(10, lp.get(i).direccionP);
+
+                    ps.executeUpdate();
+                    objC.getConexion().commit();
+                    t = true;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+                t = false;
+            } finally {
+                try {
+                    ps.close();
+
+                } catch (Exception ex) {
+                    System.out.println(" error " + ex.toString());
+                    //Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+
         }
         return t;
 
@@ -224,9 +271,8 @@ public class Profesor {
         return ma;
 
     }
-    
-    
-    public HashMap<String,String> getProfesorCombo() {
+
+    public HashMap<String, String> getProfesorCombo() {
         HashMap<String, String> map = new HashMap<String, String>();
         PreparedStatement ps = null;
         ConnectDB objC = new ConnectDB();
@@ -240,10 +286,10 @@ public class Profesor {
                 Profesor profesor;
 
                 while (rs.next()) {
-                    profesor= new Profesor();
+                    profesor = new Profesor();
                     profesor.setCodigoP(rs.getString(1));
                     profesor.setNombreP1(rs.getNString(2));
-                    
+
                     map.put(profesor.getNombreP1(), profesor.getCodigoP());
                 }
             }
@@ -251,6 +297,40 @@ public class Profesor {
             System.out.println("Error cargando lista de Restaurantes");
         }
         return map;
+    }
+
+    public boolean insertProfesor(Profesor objP,String sql) {
+          boolean t = false;
+        PreparedStatement ps = null;
+        ConnectDB objC = new ConnectDB();
+
+        try {
+            if (objC.crearConexion()) {
+                objC.getConexion().setAutoCommit(false);
+
+                ps = objC.getConexion().prepareStatement(sql);
+                ps.setString(1, objP.getCodigoP());
+                ps.setString(2, objP.getNombreP1());
+                ps.setString(3, objP.getNombreP2());
+                ps.setString(4, objP.getApellidoP1());
+                ps.setString(5, objP.getApellidoP2());
+                ps.setString(6, objP.getTelefonoP1());
+                ps.setString(7, objP.getTelefonoP2());
+                ps.setString(8, objP.getCorreoP());
+                ps.setString(9, objP.getContraseñaP());
+                ps.setString(10, objP.getDireccionP());
+
+                ps.executeUpdate();
+                objC.getConexion().commit();
+                t = true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+            t = false;
+        }
+
+        return t;
+        
     }
 
 }

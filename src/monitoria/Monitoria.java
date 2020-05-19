@@ -19,14 +19,14 @@ public class Monitoria {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        BaseDatos objb=new BaseDatos();
-        boolean t=objb.crearConexion();
-        if(t==true){
-            System.out.println("Conexión exitosa");
-        }else{
-          System.out.println("Conexión No exitosa");  
-        }
-        
+//        BaseDatos objb=new BaseDatos();
+//        boolean t=objb.crearConexion();
+//        if(t==true){
+//            System.out.println("Conexión exitosa");
+//        }else{
+//          System.out.println("Conexión No exitosa");  
+//        }
+//        
     }
     
 }
