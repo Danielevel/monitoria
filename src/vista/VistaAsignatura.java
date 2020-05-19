@@ -115,9 +115,9 @@ public class VistaAsignatura extends javax.swing.JFrame {
         ControlAsignatura objcc= new ControlAsignatura();
         boolean t = objcc.insertarCiudades(listaAsignaturas);
         if(t==true){
-            JOptionPane.showMessageDialog(rootPane,"se insertaron las ciudades");
+            JOptionPane.showMessageDialog(rootPane,"se insertaron las Asignaturas");
         }else{
-            JOptionPane.showMessageDialog(rootPane,"no se insertaron las ciudades");
+            JOptionPane.showMessageDialog(rootPane,"no se insertaron las Asignaturas");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -49,9 +49,17 @@ public class ControlProfesor {
     public LinkedList<Profesor> consultarProfesor() {
 
         LinkedList<Profesor> ma = new LinkedList<>();
-        String sql = "select codigoP,nombreP1,nombreP2,apellidoP1,apellidoP2,telefonoP1,telefonoP2,correoP,contraseñaP,dirrecionP";
+        //String sql = "select codigoP,nombreP1,nombreP2,apellidoP1,apellidoP2,telefonoP1,telefonoP2,correoP,contraseñaP,dirrecionP";
+        String sql = "select * from profesores";
         Profesor obja = new Profesor();
-        ma = obja.ejecutarSQLSelectProfesor(sql);
+        //ma = obja.ListraProfesores(sql);
+        try {
+            
+            ma = obja.ListraProfesores(sql);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return ma;
 

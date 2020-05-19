@@ -6,8 +6,12 @@
 package modelo;
 
 import control.BaseDatos;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -87,6 +91,28 @@ public class Asignaturas {
             }
         }
         return t;
+    }
+
+    public LinkedList<Asignaturas> getrAsignaturasCombo(String sql) throws SQLException {
+        LinkedList<Asignaturas> lca = new LinkedList<>();
+        BaseDatos objb = new BaseDatos();
+        int idAsig1=0;
+        String nombreAsig1="";
+        ResultSet rs = null;
+        if (objb.crearConexion()){
+            try{
+                rs = objb.getSt().executeQuery(sql);
+                    while(rs.next()){
+                        idAsig1 = rs.getInt("idAsig");
+                        nombreAsig1 = rs.getString("nombreAsig");
+                        
+                        lca.add(new Asignaturas(idAsig1,nombreAsig1));
+                    }
+            }catch (SQLException ex){
+                    Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE,null, ex);
+                    }
+        }
+        return lca;
     }
 
     
