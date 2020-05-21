@@ -17,8 +17,8 @@ public class Monitoria {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
+//         TODO code application logic here
+//        
 //        BaseDatos objb=new BaseDatos();
 //        boolean t=objb.crearConexion();
 //        if(t==true){
