@@ -46,7 +46,7 @@ public Statement getSt() {
         boolean t=false;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");                                      //user  //pass
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/monitorias", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/monitorias", "root", "12345678");
             st = conexion.createStatement();
             t=true;
         } catch (SQLException ex) {
