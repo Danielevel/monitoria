@@ -21,12 +21,14 @@ public class VistaPregunta extends javax.swing.JFrame {
 
     /**
      * Creates new form VistaPregunta
-     */LinkedList<Temas> tema;
-     LinkedList<Pregunta> objP;
+     */
+    LinkedList<Temas> tema;
+    LinkedList<Pregunta> objP;
+
     public VistaPregunta() {
         initComponents();
-        tema=  new LinkedList<>();
-        objP= new LinkedList<>();
+        tema = new LinkedList<>();
+        objP = new LinkedList<>();
     }
 
     /**
@@ -131,7 +133,7 @@ public class VistaPregunta extends javax.swing.JFrame {
         ControlPregunta objpt = new ControlPregunta();
         String preguntaP = Tpregunta.getText();
         String codigoE = jcodigoE.getText();
-        int idTemaF = 0 ;
+        int idTemaF = 0;
         for (int i = 0; i < tema.size(); i++) {
             Temas get = tema.get(i);
             String datopregunta = String.valueOf(jComboBox1.getSelectedItem());
@@ -139,12 +141,12 @@ public class VistaPregunta extends javax.swing.JFrame {
                 idTemaF = get.getIdTema();
             }
         }
-        Pregunta objP = new Pregunta(preguntaP,codigoE,idTemaF);
+        Pregunta objP = new Pregunta(preguntaP, codigoE, idTemaF);
         boolean t = objpt.insertarPregunta(objP);
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
- private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
         // TODO add your handling code here:
         ControlTemas objcf = new ControlTemas();
         tema = objcf.consultarTema();
@@ -152,7 +154,8 @@ public class VistaPregunta extends javax.swing.JFrame {
             Temas objTe = tema.get(j);
             jComboBox1.addItem(objTe.getNombreTema());
         }
-    }  
+    }
+
     /**
      * @param args the command line arguments
      */

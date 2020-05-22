@@ -13,6 +13,10 @@ import modelo.Curso;
  * @author HEWLETT PACKARD
  */
 public class ControlCurso {
+
+    public LinkedList<Curso> consultarCurso;
+
+   
     public boolean insertarCurso(LinkedList<Curso> listaCurso) {
 
         boolean t=false;
