@@ -15,7 +15,7 @@ import modelo.Asignaturas;
  */
 public class ControlAsignatura {
 
-    public boolean insertarCiudades(LinkedList<Asignaturas> listaAsignaturas) {
+    public boolean insertarAsignatura(LinkedList<Asignaturas> listaAsignaturas) {
 
         boolean t=false;
         Asignaturas objc=new Asignaturas();

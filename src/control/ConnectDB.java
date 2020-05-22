@@ -35,7 +35,7 @@ public class ConnectDB {
     public boolean crearConexion() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");                                    //user  //pass
-            conexion =DriverManager.getConnection("jdbc:mysql://localhost:3306/monitorias", "root", "root");
+            conexion =DriverManager.getConnection("jdbc:mysql://localhost:3306/monitorias", "root", "12345678");
             st = conexion.createStatement();
         } catch (SQLException ex) {
             ex.printStackTrace();

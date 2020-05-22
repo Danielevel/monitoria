@@ -5,6 +5,10 @@
  */
 package modelo;
 
+import control.BaseDatos;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author Usuario
@@ -86,6 +90,34 @@ public class Temas {
     @Override
     public String toString() {
         return "Temas{" + "idTema=" + idTema + ", nombreTema=" + nombreTema + ", idAsigFT=" + idAsigFT + '}';
+    }
+
+    public boolean insertarTema(String sql) {
+       
+        boolean t = false;
+        BaseDatos objCon = new BaseDatos();
+        
+        if(objCon.crearConexion()){
+            try{
+                Statement sentencia = objCon.getConexion().createStatement();
+                sentencia.executeUpdate(sql);
+                t=true;
+            }catch (SQLException ex){
+                ex.printStackTrace();
+                t=false;
+            }
+        }
+        return t;
+        
+        
+    }
+
+    public String getnombreTema() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean insertarTemas(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
