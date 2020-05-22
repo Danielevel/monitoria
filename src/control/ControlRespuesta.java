@@ -9,6 +9,6 @@ package control;
  *
  * @author Usuario
  */
-public class ControlComentarios {
+public class ControlRespuesta {
     
 }

@@ -47,6 +47,7 @@ public Statement getSt() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");                                      //user  //pass
             conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/monitorias", "root", "root");
+            jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull [root on Default schema]
             st = conexion.createStatement();
             t=true;
         } catch (SQLException ex) {

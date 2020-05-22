@@ -5,17 +5,23 @@
  */
 package vista;
 
+import control.ControlTema;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
+import modelo.Temas;
 /**
  *
  * @author Usuario
  */
-public class VistaTemas extends javax.swing.JFrame {
+public class VistaTema extends javax.swing.JFrame {
 
     /**
      * Creates new form VistaTemas
      */
-    public VistaTemas() {
+    LinkedList<Temas> listadeTemas;
+    public VistaTema() {
         initComponents();
+        listadeTemas=new LinkedList<>();
     }
 
     /**
@@ -46,8 +52,18 @@ public class VistaTemas extends javax.swing.JFrame {
         });
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Insertar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,8 +108,30 @@ public class VistaTemas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+       // TODO add your handling code here:
+       String nombreAsignatura =jTextField1.getText();
+       listadeTemas.add(new Temas(nombreAsignatura));
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      String nombreTema =jTextField1.getText();
+      listadeTemas.add(new Temas(nombreTema));
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+            ControlTema objCT= new ControlTema();
+            
+        
+        boolean t= objCT.insertarTemas(listadeTemas);
+         if(t==true){
+             JOptionPane.showMessageDialog(rootPane, " se insertaron los temas");
+         }else{
+             JOptionPane.showMessageDialog(rootPane, " no se insertaron los temas");
+                 }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,20 +150,22 @@ public class VistaTemas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaTemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaTemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaTemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaTemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new VistaTemas().setVisible(true);
+                new VistaTema().setVisible(true);
             }
         });
     }
