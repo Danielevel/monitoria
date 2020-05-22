@@ -369,7 +369,7 @@ public class Profesor {
                         lp.add(new Profesor(codigoP0,nombreP10,nombreP20,apellidoP10,apellidoP20,telefonoP10,telefonoP20,correoP0,contraseñaP0,direccionP0));
                     }
             }catch (SQLException ex){
-                    Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE,null, ex);
+                    Logger.getLogger(Profesor.class.getName()).log(Level.SEVERE,null, ex);
                     }
         }
         return lp;
