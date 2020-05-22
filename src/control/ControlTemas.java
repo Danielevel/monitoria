@@ -5,10 +5,17 @@
  */
 package control;
 
+import java.util.LinkedList;
+import modelo.Temas;
+
 /**
  *
  * @author Usuario
  */
 public class ControlTemas {
+
+    public LinkedList<Temas> consultarTema() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
