@@ -35,7 +35,7 @@ public class ControlAsignatura {
         LinkedList<Asignaturas> la= new LinkedList<>();
         String sql="select * from asignaturas";
         Asignaturas obja = new Asignaturas();
-        la=obja.getrAsignaturasCombo(sql);
+        la=obja.consultarAsinaturas(sql);
         
         return la;
     }

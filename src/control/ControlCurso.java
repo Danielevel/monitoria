@@ -14,9 +14,9 @@ import modelo.Curso;
  */
 public class ControlCurso {
 
-    public LinkedList<Curso> consultarCurso;
+    //public LinkedList<Curso> consultarCurso;
 
-   
+   /*
     public boolean insertarCurso(LinkedList<Curso> listaCurso) {
 
         boolean t=false;
@@ -32,6 +32,15 @@ public class ControlCurso {
         return t;
         
     }
+*/
 
+    public boolean insertarCurso(Curso objCurso) {
+            boolean t = false;
+            Curso objC2 = new Curso();
+            String sql="";
+            sql = "INSERT INTO cursos (nombreCur,idAsigFCU,codigoPFCU) VALUES(?,?,?)";
+            t = objC2.insertarCurso(objCurso,sql);
+            return t;
+    }
 
 }

@@ -6,8 +6,11 @@
 package modelo;
 
 import control.BaseDatos;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -115,8 +118,9 @@ public class Curso {
         this.idcurso = idcurso;
     }
     
-    public boolean insertarCurso(String sql) {
+    public boolean insertarCurso(Curso objCurso, String sql) {
         boolean t = false;
+       /*
         BaseDatos objCon = new BaseDatos();
         if(objCon.crearConexion()){
             try{
@@ -127,7 +131,27 @@ public class Curso {
             }catch (SQLException ex){
                 t=false;
             }
+        }*/
+       BaseDatos objb = new BaseDatos();
+       //FileInputStream fis = null;
+       PreparedStatement ps = null;
+       try{
+           if(objb.crearConexion()){
+               objb.getConexion().setAutoCommit(false);
+               ps=objb.getConexion().prepareCall(sql);
+               ps.setString(1, objCurso.getNombreCur());
+               ps.setInt(2, objCurso.getIdAsigFCU());
+               ps.setString(3, objCurso.getCodigoPFCU());
+               
+               ps.executeUpdate();
+               objb.getConexion().commit();
+               t=true;
+           }
+       } catch (SQLException ex) {
+            Logger.getLogger(Curso.class.getName()).log(Level.SEVERE, null, ex);
+            t=false;
         }
+       
         return t;
     }
     
