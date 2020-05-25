@@ -53,13 +53,7 @@ public class ControlProfesor {
         String sql = "select * from profesores";
         Profesor obja = new Profesor();
         //ma = obja.ListraProfesores(sql);
-        try {
-            
-            ma = obja.ListraProfesores(sql);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ControlProfesor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ma = obja.ListraProfesores(sql);
 
         return ma;
 
