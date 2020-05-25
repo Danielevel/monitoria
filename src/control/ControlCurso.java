@@ -14,6 +14,8 @@ import modelo.Curso;
  */
 public class ControlCurso {
 
+    public LinkedList<Curso> consultarCurso;
+
     //public LinkedList<Curso> consultarCurso;
 
    /*

@@ -5,9 +5,14 @@
  */
 package vista;
 
+import control.ConnectDB;
 import control.ControlProfesor;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Profesor;
 
 /**
@@ -19,14 +24,21 @@ public class vistaProfesor extends javax.swing.JFrame {
     /**
      * Creates new form vistaProfesor
      */
-    
+    ConnectDB cn = new ConnectDB();
+    Connection con;
+    DefaultTableModel model;
+    Statement st;
+    ResultSet rs;
+    int id = 0;
+
     LinkedList<Profesor> listaP;
     Profesor objP;
+
     public vistaProfesor() {
         initComponents();
         objP = new Profesor();
         listaP = new LinkedList<>();
-        
+
     }
 
     /**
@@ -63,7 +75,6 @@ public class vistaProfesor extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -208,14 +219,12 @@ public class vistaProfesor extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("INSERTAR");
+        jButton2.setText("LISTAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jButton3.setText("MOSTAR");
 
         jButton4.setText("MODIFICAR");
         jButton4.setName(""); // NOI18N
@@ -223,13 +232,13 @@ public class vistaProfesor extends javax.swing.JFrame {
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Primer Nombre ", "Segundo Nombre ", "Primer Apellido", "Segundo Apellido", "telefono 1", "telefono 2", "Correo", "Dirrecion"
+                "Codigo", "Primer Nombre ", "Segundo Nombre ", "Primer Apellido", "Segundo Apellido", "telefono 1", "telefono 2", "Correo", "Contraseña", "Dirrecion"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -239,7 +248,7 @@ public class vistaProfesor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,18 +257,14 @@ public class vistaProfesor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(jButton1)
-                        .addGap(38, 38, 38)
+                        .addGap(102, 102, 102)
                         .addComponent(jButton2)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton3)
-                        .addGap(44, 44, 44)
+                        .addGap(113, 113, 113)
                         .addComponent(jButton4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel10))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -270,13 +275,12 @@ public class vistaProfesor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addGap(28, 28, 28))
         );
@@ -297,19 +301,51 @@ public class vistaProfesor extends javax.swing.JFrame {
         String correo = Tcorreo.getText();
         String contraseña = Tcontraseña.getText();
         String direccion = Tdireccion.getText();
-        
+
         objP = new Profesor(codigo, nombre1, nombre2, apellido1, apellido2, Telefono1, Telefono2, correo, contraseña, direccion);
         boolean t = objpt.insertarProfesor(objP);
-        
+
         JOptionPane.showMessageDialog(rootPane, "Se agrego el profesor ");
-       
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         
+        listar();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    void listar() {
+        String sql = "select * from Profesores";
+        try {
+            con = cn.getConexion();
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            Object[] Profesor = new Object[10];
+//            String[] Titulos={"ID","DNI","NOMBRES"};         
+//            model=new DefaultTableModel(null,Titulos);   
+            model = (DefaultTableModel) jTable1.getModel();
+            while (rs.next()) {
+
+                Profesor[1] = rs.getString("codigo");
+                Profesor[2] = rs.getString("NombresP1");
+                Profesor[3] = rs.getString("NombresP2");
+                Profesor[4] = rs.getString("ApellidoP1");
+                Profesor[5] = rs.getString("ApellidoP2");
+                Profesor[6] = rs.getString("TelefonoP1");
+                Profesor[7] = rs.getString("TelefonoP2");
+                Profesor[8] = rs.getString("correoP");
+                Profesor[9] = rs.getString("contraseñaP");
+                Profesor[10] = rs.getString("Direccion");
+
+                model.addRow(Profesor);
+            }
+            jTable1.setModel(model);
+
+        } catch (Exception e) {
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -359,7 +395,6 @@ public class vistaProfesor extends javax.swing.JFrame {
     private javax.swing.JTextField Ttelefono2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

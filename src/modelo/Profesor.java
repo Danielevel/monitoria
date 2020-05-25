@@ -335,7 +335,7 @@ public class Profesor {
         
     }
 
-    public LinkedList<Profesor> ListraProfesores(String sql) throws SQLException {
+    public LinkedList<Profesor> ListraProfesores(String sql)  {
         LinkedList<Profesor> lp = new LinkedList<>();
         BaseDatos objb = new BaseDatos();
         String codigoP0="";
