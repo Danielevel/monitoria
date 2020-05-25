@@ -12,10 +12,8 @@ import modelo.Temas;
  *
  * @author Usuario
  */
-public class ControlTemas {
+public class ControlRespuesta{
 
-    public LinkedList<Temas> consultarTema() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
 }

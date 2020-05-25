@@ -31,17 +31,15 @@ public class ControlTema{
         
     }
 
-    public LinkedList<Temas> consultarTema() throws SQLException {
+    public LinkedList<Temas> consultarTema() {
 
         LinkedList<Temas> la= new LinkedList<>();
         String sql="select * from asignaturas";
         Temas obja = new Temas();
-        la=objCT.getTemasCombo(sql);
+        la=obja.getNombreTema();
         
         return la;
     }
 
-    public boolean insertarTemas(LinkedList<Temas> listadeTemas) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }

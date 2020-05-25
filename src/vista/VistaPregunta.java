@@ -7,7 +7,7 @@ package vista;
 
 import control.ControlEstudiante;
 import control.ControlPregunta;
-import control.ControlTemas;
+import control.ControlTema;
 import java.util.LinkedList;
 import modelo.Pregunta;
 import modelo.Programas;
@@ -148,7 +148,7 @@ public class VistaPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     private void formWindowOpened(java.awt.event.WindowEvent evt) {
         // TODO add your handling code here:
-        ControlTemas objcf = new ControlTemas();
+        ControlTema objcf = new ControlTema();
         tema = objcf.consultarTema();
         for (int j = 0; j < tema.size(); j++) {
             Temas objTe = tema.get(j);
