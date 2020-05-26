@@ -51,12 +51,15 @@ public class VistaPregunta extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Codigo Estudiante");
 
         jLabel2.setText("Tema:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Realiza Aqui Tu Pregunta:");
 
@@ -146,15 +149,18 @@ public class VistaPregunta extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
         ControlTema objcf = new ControlTema();
         tema = objcf.consultarTema();
         for (int j = 0; j < tema.size(); j++) {
             Temas objTe = tema.get(j);
             jComboBox1.addItem(objTe.getNombreTema());
         }
-    }
+    }//GEN-LAST:event_formWindowOpened
+    
 
     /**
      * @param args the command line arguments

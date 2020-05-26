@@ -88,11 +88,12 @@ public class Temas {
         
         
     }
-    /*public LinkedList<Temas> consultarTemas(String sql) {
+    public LinkedList<Temas> consultarTemas(String sql) {
         LinkedList<Temas> lc = new LinkedList<>();
         BaseDatos objb = new BaseDatos();
         int idTema1=0;
         String nombreTemas1="";
+        int idAsigna= 0;
         ResultSet rs = null;
         if (objb.crearConexion()){
             try{
@@ -100,7 +101,7 @@ public class Temas {
                     while(rs.next()){
                         idTema1 = rs.getInt("idTema");
                         nombreTemas1 = rs.getString("nombreTema");  
-                      lc.add(new Temas(idTema1,nombreTemas1));
+                      lc.add(new Temas(idTema1,nombreTemas1,idAsigna));
                        
                                 }
             }catch (SQLException ex){
@@ -111,6 +112,6 @@ public class Temas {
     }
 
     
-   */
+   
 
 }
