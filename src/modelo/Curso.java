@@ -7,8 +7,10 @@ package modelo;
 
 import control.BaseDatos;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -155,5 +157,31 @@ public class Curso {
         return t;
     }
     
+    public LinkedList<Curso> consultarCursos(String sql) {
+        LinkedList<Curso> lc = new LinkedList<>();
+        BaseDatos objb = new BaseDatos();
+        int idCurso=0;
+        String nombreCurso="";
+        int idAsigna= 0;
+        String codigoP = "";
+        ResultSet rs = null;
+        if (objb.crearConexion()){
+            try{
+                rs = objb.getSt().executeQuery(sql);
+                    while(rs.next()){
+                        idCurso = rs.getInt("idcurso");
+                        nombreCurso = rs.getString("nombreCur");
+                        idAsigna =rs.getInt("idAsigFCU");
+                        codigoP = rs.getString("codigoPFCU");
+                        
+                      lc.add(new Curso(idCurso, nombreCurso, idAsigna, codigoP));
+                       
+                                }
+            }catch (SQLException ex){
+                    Logger.getLogger(Temas.class.getName()).log(Level.SEVERE,null, ex);
+                    }
+        }
+        return lc;
+    }
 
 }

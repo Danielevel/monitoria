@@ -152,15 +152,14 @@ public class VistaPregunta extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+
         ControlTema objcf = new ControlTema();
-        tema = objcf.consultarTema();
+        tema = objcf.consultarTemas();
         for (int j = 0; j < tema.size(); j++) {
             Temas objTe = tema.get(j);
             jComboBox1.addItem(objTe.getNombreTema());
         }
     }//GEN-LAST:event_formWindowOpened
-    
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,7 @@ package control;
 
 import java.util.LinkedList;
 import modelo.Curso;
+import modelo.Temas;
 
 /**
  *
@@ -43,6 +44,18 @@ public class ControlCurso {
             sql = "INSERT INTO cursos (nombreCur,idAsigFCU,codigoPFCU) VALUES(?,?,?)";
             t = objC2.insertarCurso(objCurso,sql);
             return t;
+    }
+    
+    
+        public LinkedList<Curso> consultarCurso() {
+
+        LinkedList<Curso> la = new LinkedList<>();
+        String sql = "select * from monitorias.cursos";
+        Curso obja = new Curso();
+        la = obja.consultarCursos(sql);
+
+        return la;
+
     }
 
 }
