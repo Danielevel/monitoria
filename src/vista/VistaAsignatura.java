@@ -60,42 +60,6 @@ public class VistaAsignatura extends javax.swing.JFrame {
             System.out.println(e);
         }
         
-        
-        //------------------------------------------[Jtable para la lista de asignaturas]----------------------------
-        /*
-        try {
-            DefaultTableModel modelo = new DefaultTableModel();
-            jTable1.setModel(modelo);
-           PreparedStatement ps = null;
-           ResultSet rs = null;
-            BaseDatos conn = new BaseDatos();
-            Connection con = conn.getConexion();
-            String sql = "SELECT idAsig,nombreAsig FROM monitorias.asignaturas";
-            //String sql1 = "SELECT idAsig,nombreAsig FROM asignaturas";
-            
-                    ps = con.prepareStatement(sql);// por que da tanto error este fragmento
-                    rs = ps.executeQuery();
-                    ResultSetMetaData rsMd = rs.getMetaData();
-                    int cantidadColumnas = rsMd.getColumnCount();
-                    
-                    modelo.addColumn("ID");
-                    modelo.addColumn("nombre Asignatura");
-                    
-                    while(rs.next()){
-                        
-                        Object[] filas = new Object[cantidadColumnas];
-                        
-                        for(int i = 0 ; i< cantidadColumnas; i++)
-                        {
-                            filas[i] = rs.getObject(i + 1);
-                        }
-                        modelo.addRow(filas);
-                    }
-                        
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
-        */
     }
 
     /**
@@ -127,6 +91,8 @@ public class VistaAsignatura extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -218,7 +184,7 @@ public class VistaAsignatura extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +229,7 @@ public class VistaAsignatura extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Insertar o modificar Asignatura");
 
-        jLabel2.setText("para moificar Seleccione  el registo que quiera modificar de la \"lista asignaturas\"");
+        jLabel2.setText("para moificar/Eliminar Seleccione un registo que quiera modificar de la lista,");
 
         jButton2.setText("Modificar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -276,20 +242,30 @@ public class VistaAsignatura extends javax.swing.JFrame {
 
         jLabel8.setText("Ninguno");
 
-        jLabel9.setText("para insertar un registro llene el espacio de texto y click en insertar");
+        jLabel9.setText("para insertar un registro llene el espacio de texto y click en insertar.");
+
+        jButton5.setText("Eliminar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("modifique o elimine sus valores en este panel.");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addComponent(jLabel6))
@@ -303,11 +279,13 @@ public class VistaAsignatura extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel9)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -323,14 +301,17 @@ public class VistaAsignatura extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(36, 36, 36)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -339,20 +320,19 @@ public class VistaAsignatura extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(289, 289, 289)
-                            .addComponent(jLabel4))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,56 +341,51 @@ public class VistaAsignatura extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+//------------------------------------------[BOTON MODIFICAR]-------------------------------------------    
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         
-        ResultSet rs;
-        //PreparedStatement ps;
+        String modificacion = jTextField1.getText();//  los campos que voy a modificar
+      //String modificacion = jTextField2.getText();
+      
+        String Objetivo = jLabel8.getText();        //  el ID el campo que voy a modificar
         
-        String modificacion = jTextField1.getText();
-        String Objetivo = jLabel8.getText();
         String sqlModify = "UPDATE monitorias.asignaturas SET nombreAsig = '"+ modificacion +"' WHERE idAsig = '"+ Objetivo +"'"; 
+        //sentencia sql
         
         try {
-            Statement sentencia = BaseDatos.getConexionStatic().createStatement();
-            //ps = BaseDatos.getConexionStatic();
-            //ps.setString(1,codigo);.prepareStatement(sqlModify)
-            sentencia.execute(sqlModify);
-            //rs = sentencia.executeQuery(sqlModify);
+            Statement sentencia = BaseDatos.getConexionStatic().createStatement(); // conectarse a la base de datos y enviar una sentencia
+            sentencia.execute(sqlModify); // ejecutar la sentencia
             
         } catch (SQLException ex) {
             Logger.getLogger(VistaAsignatura.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*
         
+        Mostrar();// refrescar/re-cargar la lista
         
-        
-        ControlAsignatura objcc= new ControlAsignatura();
-        boolean t = objcc.insertarAsignatura(listaAsignaturas);
-        if(t==true){
-            JOptionPane.showMessageDialog(rootPane,"se insertaron las Asignaturas");
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"no se insertaron las Asignaturas");
-        }
-        */
     }//GEN-LAST:event_jButton2ActionPerformed
-
+//------------------------------------------------------------------------------------------------------    
+    
+//------------------------------------------[BOTON REFRESCAR]-------------------------------------------       
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Mostrar();
     }//GEN-LAST:event_jButton3ActionPerformed
-
+//------------------------------------------------------------------------------------------------------    
+    
+//------------------------------------------[BOTON BUSCAR]---------------------------------------------- 
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         String campo = jTextField2.getText();
@@ -435,7 +410,11 @@ public class VistaAsignatura extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-
+//------------------------------------------------------------------------------------------------------ 
+    
+    
+//------------------------------------------[BOTON INSERTAR]---------------------------------------------- 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          String nombreAsignatura = jTextField1.getText();
@@ -449,15 +428,17 @@ public class VistaAsignatura extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"no se insertaron las Asignaturas");
         }
         listaAsignaturas.clear();
-
-
-
+        
+        Mostrar();// refrescar/re-cargar la lista
     }//GEN-LAST:event_jButton1ActionPerformed
-
+//------------------------------------------------------------------------------------------------------ 
+    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+//---------------------------[SELECCIONAR OBJETOS DE LA TABLA]--------------------------------------- 
+    
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         ResultSet rs;
@@ -485,6 +466,25 @@ public class VistaAsignatura extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String Objetivo = jLabel8.getText(); //  el ID el campo que voy a Eliminar
+        
+        String sqlModify = "DELETE FROM monitorias.asignaturas WHERE idAsig = '"+ Objetivo +"'"; 
+        //sentencia sql
+        
+        try {
+            Statement sentencia = BaseDatos.getConexionStatic().createStatement(); // conectarse a la base de datos y enviar una sentencia
+            sentencia.execute(sqlModify); // ejecutar la sentencia
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VistaAsignatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Mostrar();// refrescar/re-cargar la lista
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+//------------------------------------------------------------------------------------------------------ 
+    
     /**
      * @param args the command line arguments
      */
@@ -526,7 +526,9 @@ public class VistaAsignatura extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
