@@ -85,6 +85,37 @@ public class BaseDatos {
         }
         return datos;
     }
+    
+     public String ejecutarSQLSelect(String sql) {
+        ResultSet rs;
+        int id;
+        String nom = "";
+        String tel = "";
+        String dir = "";
+        String concatenar = "";
+
+        try {
+            Statement sentencia = conexion.createStatement();
+            rs = sentencia.executeQuery(sql);
+            /*
+            while (rs.next()) {
+                id = rs.getInt(1);
+                nom = rs.getNString("nombreusuario");
+                tel = rs.getNString("cedulausuario");
+                dir = rs.getNString("celusuario");
+
+                concatenar = id + " " + nom + " " + tel + " " + dir;
+            }
+            */
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        return concatenar;
+        //return rs;
+    }
 //----------------------------------------------------------------------------------------------------------
     
     
@@ -119,33 +150,7 @@ public class BaseDatos {
      * @return resultado regresa los registros generados por la consulta
      *     
 
-    public String ejecutarSQLSelect(String sql) {
-        ResultSet rs;
-        int id;
-        String nom = "";
-        String tel = "";
-        String dir = "";
-        String concatenar = "";
-
-        try {
-            Statement sentencia = conexion.createStatement();
-            rs = sentencia.executeQuery(sql);
-            while (rs.next()) {
-                id = rs.getInt(1);
-                nom = rs.getNString("nombreusuario");
-                tel = rs.getNString("cedulausuario");
-                dir = rs.getNString("celusuario");
-
-                concatenar = id + " " + nom + " " + tel + " " + dir;
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
-        return concatenar;
-    }
+   
     
     public void storeProcedious() {
         CallableStatement statemen;
