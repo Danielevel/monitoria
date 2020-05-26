@@ -5,8 +5,10 @@
  */
 package control;
 
+import static control.BaseDatos.getConexionStatic;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -47,6 +49,22 @@ public class ConnectDB {
         }
 
         return true;
+    }
+    
+    
+    public static ResultSet getTabla(String Consulta){
+        Connection cn;
+        cn = getConexionStatic();
+        Statement st;
+        ResultSet datos = null;
+        try {
+            st = cn.createStatement();
+            datos=st.executeQuery(Consulta);
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return datos;
     }
 
 }

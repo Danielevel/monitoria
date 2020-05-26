@@ -5,6 +5,7 @@
  */
 package vista;
 
+import control.BaseDatos;
 import control.ConnectDB;
 import control.ControlProfesor;
 import java.sql.Connection;
@@ -316,33 +317,19 @@ public class vistaProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     void listar() {
-        String sql = "select * from Profesores";
+        String sql = "SELECT * FROM monitorias.profesores";
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet rs = BaseDatos.getTabla(sql);
+        modelo.setColumnIdentifiers(new Object[]{"codigoP", "nombreP1", "nombreP2", "apellidoP1", "apellidoP2" ,"telefonoP1" , "telefonoP2" , "correoP" , "contraseñaP" , "direccionP"});
         try {
-            con = cn.getConexion();
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            Object[] Profesor = new Object[10];
-//            String[] Titulos={"ID","DNI","NOMBRES"};         
-//            model=new DefaultTableModel(null,Titulos);   
-            model = (DefaultTableModel) jTable1.getModel();
             while (rs.next()) {
-
-                Profesor[1] = rs.getString("codigo");
-                Profesor[2] = rs.getString("NombresP1");
-                Profesor[3] = rs.getString("NombresP2");
-                Profesor[4] = rs.getString("ApellidoP1");
-                Profesor[5] = rs.getString("ApellidoP2");
-                Profesor[6] = rs.getString("TelefonoP1");
-                Profesor[7] = rs.getString("TelefonoP2");
-                Profesor[8] = rs.getString("correoP");
-                Profesor[9] = rs.getString("contraseñaP");
-                Profesor[10] = rs.getString("Direccion");
-
-                model.addRow(Profesor);
+              
+                modelo.addRow(new Object[]{rs.getString("codigoP"),rs.getString("nombreP1"),rs.getString("nombreP2"),rs.getString("apellidoP1"),rs.getString("apellidoP2"),rs.getString("telefonoP1"),rs.getString("telefonoP2"),rs.getString("correoP"),rs.getString("contraseñaP"),rs.getString("direccionP")});
             }
+            
             jTable1.setModel(model);
-
         } catch (Exception e) {
+            System.out.println(e);
         }
 
     }
