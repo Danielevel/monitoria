@@ -334,7 +334,7 @@ public class VistaCurso extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          String modificacion = jTextField1.getText();//  los campos que voy a modificar
-         int modificacion2 = jComboBox1.();
+         String modificacion2 = jComboBox1.getSelectedItem().toString();
          String modificacion3 = jComboBox2.getSelectedItem().toString();
       
         String Objetivo = jLabel6.getText();        //  el ID el campo que voy a modificar
