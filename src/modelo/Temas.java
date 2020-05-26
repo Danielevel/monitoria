@@ -6,8 +6,12 @@
 package modelo;
 
 import control.BaseDatos;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,8 +23,7 @@ public class Temas {
     private String nombreTema;
     private int idAsigFT;
 
-    public Temas(String nombreTema) {
-        this.nombreTema = nombreTema;
+    public Temas() {
     }
 
     public Temas(int idTema, String nombreTema, int idAsigFT) {
@@ -29,62 +32,33 @@ public class Temas {
         this.idAsigFT = idAsigFT;
     }
 
-    public Temas() {
-    }
-
-    /**
-     * Get the value of idAsigFT
-     *
-     * @return the value of idAsigFT
-     */
-    public int getIdAsigFT() {
-        return idAsigFT;
-    }
-
-    /**
-     * Set the value of idAsigFT
-     *
-     * @param idAsigFT new value of idAsigFT
-     */
-    public void setIdAsigFT(int idAsigFT) {
-        this.idAsigFT = idAsigFT;
-    }
-
-    /**
-     * Get the value of nombreTema
-     *
-     * @return the value of nombreTema
-     */
-    public String getNombreTema() {
-        return nombreTema;
-    }
-
-    /**
-     * Set the value of nombreTema
-     *
-     * @param nombreTema new value of nombreTema
-     */
-    public void setNombreTema(String nombreTema) {
+    public Temas(String nombreTema) {
         this.nombreTema = nombreTema;
     }
 
-
-    /**
-     * Get the value of idTema
-     *
-     * @return the value of idTema
-     */
+ 
     public int getIdTema() {
         return idTema;
     }
 
-    /**
-     * Set the value of idTema
-     *
-     * @param idTema new value of idTema
-     */
     public void setIdTema(int idTema) {
         this.idTema = idTema;
+    }
+
+    public String getNombreTema() {
+        return nombreTema;
+    }
+
+    public void setNombreTema(String nombreTema) {
+        this.nombreTema = nombreTema;
+    }
+
+    public int getIdAsigFT() {
+        return idAsigFT;
+    }
+
+    public void setIdAsigFT(int idAsigFT) {
+        this.idAsigFT = idAsigFT;
     }
 
     @Override
@@ -92,7 +66,10 @@ public class Temas {
         return "Temas{" + "idTema=" + idTema + ", nombreTema=" + nombreTema + ", idAsigFT=" + idAsigFT + '}';
     }
 
-    public boolean insertarTema(String sql) {
+    
+
+    
+    public boolean insertarTemas(String sql) {
        
         boolean t = false;
         BaseDatos objCon = new BaseDatos();
@@ -111,13 +88,29 @@ public class Temas {
         
         
     }
-
-    public String getnombreTema() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /*public LinkedList<Temas> consultarTemas(String sql) {
+        LinkedList<Temas> lc = new LinkedList<>();
+        BaseDatos objb = new BaseDatos();
+        int idTema1=0;
+        String nombreTemas1="";
+        ResultSet rs = null;
+        if (objb.crearConexion()){
+            try{
+                rs = objb.getSt().executeQuery(sql);
+                    while(rs.next()){
+                        idTema1 = rs.getInt("idTema");
+                        nombreTemas1 = rs.getString("nombreTema");  
+                      lc.add(new Temas(idTema1,nombreTemas1));
+                       
+                                }
+            }catch (SQLException ex){
+                    Logger.getLogger(Temas.class.getName()).log(Level.SEVERE,null, ex);
+                    }
+        }
+        return lc;
     }
 
-    public boolean insertarTemas(String sql) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+   */
 
 }

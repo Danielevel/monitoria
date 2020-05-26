@@ -19,10 +19,10 @@ public class ControlTema{
     public boolean insertarTemas(LinkedList<Temas> listadeTemas) {
 
         boolean t=false;
-        Temas objc=new Temas();
+       Temas objc= new Temas();
         for (int i = 0;i< listadeTemas.size();i++){
             Temas get = listadeTemas.get(i);
-            String sql = "insert into asignaturas(nombreTema) value('"+get.getnombreTema()+"')";
+            String sql = "insert into Temas(nombreTema) value('"+get.getNombreTema()+"');";
         
             t=objc.insertarTemas(sql);
         }
@@ -31,15 +31,18 @@ public class ControlTema{
         
     }
 
-    public LinkedList<Temas> consultarTema() {
+    /*
+    public LinkedList<Temas> consultarTemas() throws SQLException{
 
         LinkedList<Temas> la= new LinkedList<>();
-        String sql="select * from asignaturas";
+        String sql="select * from temas";
         Temas obja = new Temas();
-        la=obja.getNombreTema();
+        la=obja.consultarTemas(sql);
         
         return la;
     }
+  
+*/
 
     
 }
