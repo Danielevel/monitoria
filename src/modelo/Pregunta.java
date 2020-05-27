@@ -6,7 +6,9 @@
 package modelo;
 
 import control.BaseDatos;
+import control.ConnectDB;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -93,20 +95,40 @@ public class Pregunta {
         return "Pregunta{" + "idPregunta=" + idPregunta + ", PreguntaP=" + PreguntaP + ", FechayHoraP=" + FechayHoraP + ", codigoEFP=" + codigoEFP + ", idTemaFP=" + idTemaFP + '}';
     }
 
-    public boolean insertarPregunta(String sql) {
-        boolean t = false;
-        BaseDatos objCon = new BaseDatos();
-        if (objCon.crearConexion()) {
-            try {
-                Statement sentencia = objCon.getConexion().createStatement();
-                sentencia.executeUpdate(sql);
+    public boolean insertarPregunta(String sql, Pregunta obE) {
+       boolean t = false;
+        PreparedStatement ps = null;
+        ConnectDB objC = new ConnectDB();try {
+            if (objC.crearConexion()) {
+                objC.getConexion().setAutoCommit(false);
+
+                ps = objC.getConexion().prepareStatement(sql);
+                ps.setString(1, obE.getPreguntaP());
+                ps.setString(2, obE.getCodigoEFP());
+                ps.setString(3, Integer.toString(obE.getIdTemaFP()));
+                
+                ps.executeUpdate();
+                objC.getConexion().commit();
                 t = true;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                t = false;
             }
+        } catch (Exception ex) {
+            Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+            t = false;
         }
+
         return t;
+        
+//        if (objCon.crearConexion()) {
+//            try {
+//                Statement sentencia = objCon.getConexion().createStatement();
+//                sentencia.executeUpdate(sql);
+//                t = true;
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//                t = false;
+//            }
+//        }
+//        return t;
     }
 
     public LinkedList<Pregunta> getrPreguntaCombo(String sql) throws SQLException {
@@ -132,19 +154,19 @@ public class Pregunta {
         return lpre;
     }
 
-    public boolean insertarPregunta(String sql, Pregunta objP) {
-        boolean t = false;
-        BaseDatos objCon = new BaseDatos();
-        if (objCon.crearConexion()) {
-            try {
-                Statement sentencia = objCon.getConexion().createStatement();
-                sentencia.executeUpdate(sql);
-                t = true;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                t = false;
-            }
-        }
-        return t;
-    }
+//    public boolean insertarPregunta(String sql, Pregunta objP) {
+//        boolean t = false;
+//        BaseDatos objCon = new BaseDatos();
+//        if (objCon.crearConexion()) {
+//            try {
+//                Statement sentencia = objCon.getConexion().createStatement();
+//                sentencia.executeUpdate(sql);
+//                t = true;
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//                t = false;
+//            }
+//        }
+//        return t;
+//    }
 }

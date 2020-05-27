@@ -8,6 +8,7 @@ package vista;
 import control.ControlCurso;
 import control.ControlInscripciones;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import modelo.Curso;
 import modelo.Inscripciones;
 
@@ -133,7 +134,7 @@ public class vistaIncripcion extends javax.swing.JFrame {
 
         ControlInscripciones objpt = new ControlInscripciones();
         String codigoE = jTextField1.getText();
-        String Periodo = jComboBox2.getName();
+        String Periodo = String.valueOf(jComboBox2.getSelectedItem());
         int Idcurso = 0;
         
          for (int i = 0; i < curso.size(); i++) {
@@ -146,6 +147,13 @@ public class vistaIncripcion extends javax.swing.JFrame {
          
          Inscripciones obj = new Inscripciones(Periodo, codigoE, Idcurso);
          boolean t = objpt.insertarInscripcion(obj);
+         
+          if(t==true){
+            JOptionPane.showMessageDialog(rootPane,"Su inscripcion fue realizada");
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"no se realizo al inscripcion verifique sus datos");
+        }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

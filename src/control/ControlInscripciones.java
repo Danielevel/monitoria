@@ -33,7 +33,7 @@ public class ControlInscripciones {
     public boolean insertarInscripcion(Inscripciones obj) {
         boolean t = false;
         String sql = "";
-         sql="insert into (periodoAcademico,codigoEFI,idcursoFI) values (?,?,?);";
+         sql="insert into inscripciones(periodoAcademico,codigoEFI,idcursoFI) values (?,?,?);";
         Inscripciones objp2= new Inscripciones();
         t = objp2.insertarInscripcion(sql, obj);
         return t;

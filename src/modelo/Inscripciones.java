@@ -6,8 +6,12 @@
 package modelo;
 
 import control.BaseDatos;
+import control.ConnectDB;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -73,36 +77,44 @@ public class Inscripciones {
         return "Inscripciones{" + "idIns=" + idIns + ", periodoAcademico=" + periodoAcademico + ", codigoEFI=" + codigoEFI + ", idcursoFI=" + idcursoFI + '}';
     }
 
-    public boolean insertarInscripcion(String sql) {
+    public boolean insertarInscripcion(String sql, Inscripciones obE) {
         boolean t = false;
-        BaseDatos objCon = new BaseDatos();
-        if (objCon.crearConexion()) {
-            try {
-                Statement sentencia = objCon.getConexion().createStatement();
-                sentencia.executeUpdate(sql);
+        PreparedStatement ps = null;
+        ConnectDB objC = new ConnectDB();try {
+            if (objC.crearConexion()) {
+                objC.getConexion().setAutoCommit(false);
+
+                ps = objC.getConexion().prepareStatement(sql);
+                ps.setString(1, obE.getPeriodoAcademico());
+                ps.setString(2, obE.getCodigoEFI());
+                ps.setString(3, Integer.toString(obE.getIdcursoFI()));
+                
+                ps.executeUpdate();
+                objC.getConexion().commit();
                 t = true;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                t = false;
             }
+        } catch (Exception ex) {
+            Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+            t = false;
         }
+
         return t;
     }
 
-    public boolean insertarInscripcion(String sql, Inscripciones objP) {
-        boolean t = false;
-        BaseDatos objCon = new BaseDatos();
-        if (objCon.crearConexion()) {
-            try {
-                Statement sentencia = objCon.getConexion().createStatement();
-                sentencia.executeUpdate(sql);
-                t = true;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                t = false;
-            }
-        }
-        return t;
-    }
-
+//    public boolean insertarInscripcion(String sql, Inscripciones objP) {
+//        boolean t = false;
+//        BaseDatos objCon = new BaseDatos();
+//        if (objCon.crearConexion()) {
+//            try {
+//                Statement sentencia = objCon.getConexion().createStatement();
+//                sentencia.executeUpdate(sql);
+//                t = true;
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//                t = false;
+//            }
+//        }
+//        return t;
+//
+//    }
 }

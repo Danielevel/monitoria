@@ -327,7 +327,13 @@ public class vistaProfesor extends javax.swing.JFrame {
         objP = new Profesor(codigo, nombre1, nombre2, apellido1, apellido2, Telefono1, Telefono2, correo, contraseña, direccion);
         boolean t = objpt.insertarProfesor(objP);
 
-        JOptionPane.showMessageDialog(rootPane, "Se agrego el profesor ");
+        if (t == true) {
+            JOptionPane.showMessageDialog(rootPane, "se insertaron las profesor");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "no se insertaron las profesor");
+        }
+        
+        nuevo();
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -353,6 +359,19 @@ public class vistaProfesor extends javax.swing.JFrame {
             System.out.println(e);
         }
 
+    }
+
+    void nuevo() {
+        Tcodigo.setText("");
+        Tnombre1.setText("");
+        Tnombre2.setText("");
+        Tapellido1.setText("");
+        Tapellido2.setText("");
+        Ttelefono1.setText("");
+        Ttelefono2.setText("");
+        Tcorreo.setText("");
+        Tcontraseña.setText("");
+        Tdireccion.setText("");
     }
 
     /**

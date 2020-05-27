@@ -9,6 +9,7 @@ import control.ControlEstudiante;
 import control.ControlPregunta;
 import control.ControlTema;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import modelo.Pregunta;
 import modelo.Programas;
 import modelo.Temas;
@@ -136,7 +137,7 @@ public class VistaPregunta extends javax.swing.JFrame {
         ControlPregunta objpt = new ControlPregunta();
         String preguntaP = Tpregunta.getText();
         String codigoE = jcodigoE.getText();
-        int idTemaF = 0;
+        int idTemaF = 1;
         for (int i = 0; i < tema.size(); i++) {
             Temas get = tema.get(i);
             String datopregunta = String.valueOf(jComboBox1.getSelectedItem());
@@ -147,7 +148,13 @@ public class VistaPregunta extends javax.swing.JFrame {
         Pregunta objP = new Pregunta(preguntaP, codigoE, idTemaF);
         boolean t = objpt.insertarPregunta(objP);
 
+        if (t == true) {
+            JOptionPane.showMessageDialog(rootPane, "se insertaron las pregunta");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "no se insertaron las pregunta");
+        }
 
+        nuevo();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -160,6 +167,14 @@ public class VistaPregunta extends javax.swing.JFrame {
             jComboBox1.addItem(objTe.getNombreTema());
         }
     }//GEN-LAST:event_formWindowOpened
+    
+    
+    
+    void nuevo() {
+        Tpregunta.setText("");
+        jcodigoE.setText("");
+
+    }
 
     /**
      * @param args the command line arguments

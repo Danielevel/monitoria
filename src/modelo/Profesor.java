@@ -296,7 +296,7 @@ public class Profesor {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error cargando lista de Restaurantes");
+            System.out.println("Error cargando lista de profesor ");
         }
         return map;
     }
