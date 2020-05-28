@@ -6,6 +6,8 @@
 package modelo;
 
 import control.BaseDatos;
+import control.ConnectDB;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -67,20 +69,15 @@ public class Temas {
     }
 
     
-
-    
-    public boolean insertarTemas(String sql) {
-       
+public boolean insertarTemas(String sql) {
         boolean t = false;
         BaseDatos objCon = new BaseDatos();
-        
         if(objCon.crearConexion()){
             try{
                 Statement sentencia = objCon.getConexion().createStatement();
                 sentencia.executeUpdate(sql);
                 t=true;
             }catch (SQLException ex){
-                ex.printStackTrace();
                 t=false;
             }
         }

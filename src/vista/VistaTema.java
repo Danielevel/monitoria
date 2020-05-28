@@ -5,9 +5,13 @@
  */
 package vista;
 
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
+import modelo.Temas;
 import control.ControlTema;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import modelo.Asignaturas;
 import modelo.Temas;
 /**
  *
@@ -18,10 +22,10 @@ public class VistaTema extends javax.swing.JFrame {
     /**
      * Creates new form VistaTemas
      */
-    LinkedList<Temas> listadeTemas;
+    LinkedList<Temas> listaTemas;
     public VistaTema() {
         initComponents();
-        listadeTemas=new LinkedList<>();
+        listaTemas=new LinkedList<>();
     }
 
     /**
@@ -36,7 +40,6 @@ public class VistaTema extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,13 +51,6 @@ public class VistaTema extends javax.swing.JFrame {
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -80,9 +76,7 @@ public class VistaTema extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jButton1)
-                        .addGap(76, 76, 76)
+                        .addGap(221, 221, 221)
                         .addComponent(jButton2)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
@@ -96,9 +90,7 @@ public class VistaTema extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addComponent(jButton2)
                 .addGap(75, 75, 75))
         );
 
@@ -110,22 +102,20 @@ public class VistaTema extends javax.swing.JFrame {
      
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String  nombreTema =jTextField1.getText();
-       listadeTemas.add(new Temas(nombreTema));
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        ControlTema objcc =new ControlTema();
-        boolean t = objcc.insertarTemas(listadeTemas);
-        if (t==true) {
-            JOptionPane.showMessageDialog(rootPane, "se insertaron los temas");
-            
-        } else {
-              JOptionPane.showMessageDialog(rootPane, " no se insertaron los temas");
+       // TODO add your handling code here:
+         String nombreTema = jTextField1.getText();
+        listaTemas.add(new Temas(nombreTema));
+
+        ControlTema objcc= new ControlTema();
+        boolean t = objcc.insertarTemas(listaTemas);
+        if(t==true){
+            JOptionPane.showMessageDialog(rootPane,"se insertaron las Asignaturas");
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"no se insertaron las Asignaturas");
         }
-        
+        listaTemas.clear();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -166,7 +156,6 @@ public class VistaTema extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

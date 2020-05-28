@@ -7,6 +7,7 @@ package control;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
+import modelo.Asignaturas;
 import modelo.Temas;
 
 /**
@@ -14,21 +15,6 @@ import modelo.Temas;
  * @author HEWLETT PACKARD
  */
 public class ControlTema {
-
-    public boolean insertarTemas(LinkedList<Temas> listadeTemas) {
-
-        boolean t = false;
-        Temas objc = new Temas();
-        for (int i = 0; i < listadeTemas.size(); i++) {
-            Temas get = listadeTemas.get(i);
-            String sql = "insert into Temas(nombreTema) value('" + get.getNombreTema() + "');";
-
-            t = objc.insertarTemas(sql);
-        }
-
-        return t;
-
-    }
 
     public LinkedList<Temas> consultarTemas() {
 
@@ -41,4 +27,19 @@ public class ControlTema {
 
     }
 
+     public boolean insertarTemas(LinkedList<Temas> listaTemas) {
+
+        boolean t=false;
+        Temas objc=new Temas();
+        for (int i = 0;i< listaTemas.size();i++){
+            Temas get = listaTemas.get(i);
+            String sql = "insert into temas(nombreTema) value('"+get.getNombreTema()+"')";
+        
+            t=objc.insertarTemas(sql);
+        }
+        
+        return t;
+        
+
+}
 }
