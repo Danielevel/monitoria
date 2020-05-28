@@ -36,6 +36,12 @@ public class Temas {
 
     public Temas(String nombreTema) {
         this.nombreTema = nombreTema;
+        
+    }
+
+    public Temas(String nombreTema, int idAsigFT) {
+        this.nombreTema = nombreTema;
+        this.idAsigFT = idAsigFT;
     }
 
  
@@ -68,6 +74,7 @@ public class Temas {
         return "Temas{" + "idTema=" + idTema + ", nombreTema=" + nombreTema + ", idAsigFT=" + idAsigFT + '}';
     }
 
+    
     
 public boolean insertarTemas(String sql) {
         boolean t = false;
@@ -107,6 +114,23 @@ public boolean insertarTemas(String sql) {
         }
         return lc;
     }
+
+    public boolean insertarTemas(String sql, Temas obj) {
+     boolean t = false;
+        BaseDatos objCon = new BaseDatos();
+        if(objCon.crearConexion()){
+            try{
+                Statement sentencia = objCon.getConexion().createStatement();
+                sentencia.executeUpdate(sql);
+                t=true;
+            }catch (SQLException ex){
+                t=false;
+            }
+        }
+        return t;
+        
+    }
+    
 
     
    

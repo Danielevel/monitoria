@@ -8,6 +8,7 @@ package control;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import modelo.Asignaturas;
+import modelo.Inscripciones;
 import modelo.Temas;
 
 /**
@@ -20,6 +21,7 @@ public class ControlTema {
 
         LinkedList<Temas> la = new LinkedList<>();
         String sql = "select * from temas";
+        
         Temas obja = new Temas();
         la = obja.consultarTemas(sql);
 
@@ -27,7 +29,7 @@ public class ControlTema {
 
     }
 
-     public boolean insertarTemas(LinkedList<Temas> listaTemas) {
+    /* public boolean insertarTemas(LinkedList<Temas> listaTemas) {
 
         boolean t=false;
         Temas objc=new Temas();
@@ -40,6 +42,15 @@ public class ControlTema {
         
         return t;
         
+*/
 
-}
+     public boolean insertarTemas(Temas obj) {
+        boolean t = false;
+        String sql = "";
+         sql="insert into Temas(nombreTema,idAsigFT) values (?,?);";
+        Temas objp2= new Temas();
+        t = objp2.insertarTemas(sql, obj);
+        return t;
+        
+    }
 }

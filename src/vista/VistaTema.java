@@ -5,6 +5,8 @@
  */
 package vista;
 
+import control.ControlAsignatura;
+import control.ControlInscripciones;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import modelo.Temas;
@@ -12,6 +14,7 @@ import control.ControlTema;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import modelo.Asignaturas;
+import modelo.Curso;
 import modelo.Temas;
 /**
  *
@@ -23,9 +26,13 @@ public class VistaTema extends javax.swing.JFrame {
      * Creates new form VistaTemas
      */
     LinkedList<Temas> listaTemas;
+    LinkedList<Asignaturas> Asigna;
+    
     public VistaTema() {
         initComponents();
         listaTemas=new LinkedList<>();
+        Asigna = new LinkedList<>();
+        
     }
 
     /**
@@ -41,8 +48,14 @@ public class VistaTema extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Insertar Temas");
 
@@ -69,16 +82,20 @@ public class VistaTema extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel2)
+                        .addContainerGap(18, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(jButton2)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,12 +103,13 @@ public class VistaTema extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76)
                 .addComponent(jButton2)
-                .addGap(75, 75, 75))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,19 +123,43 @@ public class VistaTema extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
        // TODO add your handling code here:
+        ControlTema objT = new ControlTema();
+        String nombreTemas  = jTextField1.getText();
+        int idAsigFT = 0;
+    
+        
+         for (int i = 0; i < Asigna.size(); i++) {
+            Asignaturas get = Asigna.get(i);
+            String dato = String.valueOf(jComboBox1.getSelectedItem());
+
+            if (dato.equals(get.getNombreAsig())) {
+                idAsigFT = get.getIdAsig();
+            }
          String nombreTema = jTextField1.getText();
         listaTemas.add(new Temas(nombreTema));
-
+         Temas objp2= new Temas(nombreTema, idAsigFT);
+        
+        
+        
         ControlTema objcc= new ControlTema();
-        boolean t = objcc.insertarTemas(listaTemas);
+        boolean t = objcc.insertarTemas(objp2);
         if(t==true){
-            JOptionPane.showMessageDialog(rootPane,"se insertaron las Asignaturas");
+            JOptionPane.showMessageDialog(rootPane,"se insertaron las temas");
         }else{
-            JOptionPane.showMessageDialog(rootPane,"no se insertaron las Asignaturas");
-        }
+            JOptionPane.showMessageDialog(rootPane,"no se insertaron las temas");
+        }}
         listaTemas.clear();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        ControlAsignatura objcf = new ControlAsignatura();
+      Asigna = objcf.consultarAsignaturas();
+        for (int j = 0; j < Asigna.size(); j++) {
+            Asignaturas objTe = Asigna.get (j);
+            jComboBox1.addItem(objTe.getNombreAsig());
+    }//GEN-LAST:event_formWindowOpened
+    }
     /**
      * @param args the command line arguments
      */
@@ -157,8 +199,10 @@ public class VistaTema extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
+
