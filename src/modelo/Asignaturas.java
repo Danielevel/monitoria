@@ -93,7 +93,7 @@ public class Asignaturas {
         return t;
     }
 
-    public LinkedList<Asignaturas> consultarAsinaturas(String sql) throws SQLException {
+    public LinkedList<Asignaturas> consultarAsinaturas(String sql) {
         LinkedList<Asignaturas> lca = new LinkedList<>();
         BaseDatos objb = new BaseDatos();
         int idAsig1=0;

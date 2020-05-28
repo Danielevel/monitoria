@@ -9,8 +9,10 @@ import control.BaseDatos;
 import control.ConnectDB;
 import control.ControlProfesor;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +30,7 @@ public class vistaProfesor extends javax.swing.JFrame {
     ConnectDB cn = new ConnectDB();
     Connection con;
     DefaultTableModel model;
-    Statement st;
+    PreparedStatement st = null;
     ResultSet rs;
     int id = 0;
 
@@ -244,6 +246,11 @@ public class vistaProfesor extends javax.swing.JFrame {
 
         jButton4.setText("MODIFICAR");
         jButton4.setName(""); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jTable3.setAutoCreateRowSorter(true);
         jTable3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -259,6 +266,11 @@ public class vistaProfesor extends javax.swing.JFrame {
             }
         ));
         jTable3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
         jTable3.getAccessibleContext().setAccessibleDescription("");
 
@@ -332,7 +344,7 @@ public class vistaProfesor extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "no se insertaron las profesor");
         }
-        
+
         nuevo();
 
 
@@ -342,6 +354,62 @@ public class vistaProfesor extends javax.swing.JFrame {
         // TODO add your handling code here:
         listar();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+        int fila = jTable3.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "usuario no selecionado");
+        } else {
+
+            String idP = (String) jTable3.getValueAt(fila, 0);
+            String nom1 = (String) jTable3.getValueAt(fila, 1);
+            String nom2 = (String) jTable3.getValueAt(fila, 2);
+            String ape1 = (String) jTable3.getValueAt(fila, 3);
+            String ape2 = (String) jTable3.getValueAt(fila, 4);
+            String tel1 = (String) jTable3.getValueAt(fila, 5);
+            String tel2 = (String) jTable3.getValueAt(fila, 6);
+            String correo = (String) jTable3.getValueAt(fila, 7);
+            String contra = (String) jTable3.getValueAt(fila, 8);
+            String direc = (String) jTable3.getValueAt(fila, 9);
+
+            Tcodigo.setText(idP);
+            Tnombre1.setText(nom1);
+            Tnombre2.setText(nom2);
+            Tapellido1.setText(ape1);
+            Tapellido2.setText(ape2);
+            Ttelefono1.setText(tel1);
+            Ttelefono2.setText(tel2);
+            Tcorreo.setText(correo);
+            Tcontraseña.setText(contra);
+            Tdireccion.setText(direc);
+            Tcodigo.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        ControlProfesor objpt = new ControlProfesor();
+        String codigo = Tcodigo.getText();
+        String nombre1 = Tnombre1.getText();
+        String nombre2 = Tnombre2.getText();
+        String apellido1 = Tapellido1.getText();
+        String apellido2 = Tapellido2.getText();
+        String Telefono1 = Ttelefono1.getText();
+        String Telefono2 = Ttelefono2.getText();
+        String correo = Tcorreo.getText();
+        String contraseña = Tcontraseña.getText();
+        String direccion = Tdireccion.getText();
+
+        objP = new Profesor(codigo, nombre1, nombre2, apellido1, apellido2, Telefono1, Telefono2, correo, contraseña, direccion);
+        boolean t = objpt.insertarProfesor(objP);
+
+        if (t == true) {
+            JOptionPane.showMessageDialog(rootPane, "se insertaron las profesor");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "no se insertaron las profesor");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     void listar() {
 //        String sql = "SELECT * FROM monitorias.profesores";
@@ -359,6 +427,40 @@ public class vistaProfesor extends javax.swing.JFrame {
             System.out.println(e);
         }
 
+    }
+
+    void mosdificar() {
+        String codigo = Tcodigo.getText();
+        String nombre1 = Tnombre1.getText();
+        String nombre2 = Tnombre2.getText();
+        String apellido1 = Tapellido1.getText();
+        String apellido2 = Tapellido2.getText();
+        String Telefono1 = Ttelefono1.getText();
+        String Telefono2 = Ttelefono2.getText();
+        String correo = Tcorreo.getText();
+        String contraseña = Tcontraseña.getText();
+        String direccion = Tdireccion.getText();
+        ResultSet rs;
+        PreparedStatement ps;
+
+        String sql = "update profesores set nombreP1='" + nombre1 + "',nombreP2='" + nombre2 + "',apellidoP1='" + apellido1 + "',apellidoP2='" + apellido2 + "',telefonoP1='" + Telefono1 + "',telefonoP2='" + Telefono2 + "',correoP='" + correo + "',contraseñaP='" + contraseña + "',dirrecionP='" + direccion + "' where codigoP =" + codigo + "'";
+
+        try {
+            if (nombre1 != "" || apellido1 != "" || Telefono1 != "" || correo != "" || contraseña != "" || direccion != "") {
+
+                Statement sentencia = BaseDatos.getConexionStatic().createStatement(); // conectarse a la base de datos y enviar una sentencia
+                sentencia.execute(sql);
+                listar();
+                nuevo();
+                JOptionPane.showMessageDialog(null, "profesor Modificado");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Error...!!!");
+            }
+
+        } catch (Exception e) {
+        }
+//codigoP,nombreP1,nombreP2,apellidoP1,apellidoP2,telefonoP1,telefonoP2,correoP,contraseñaP,dirrecionP
     }
 
     void nuevo() {

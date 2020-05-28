@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import modelo.Asignaturas;
 import modelo.Curso;
 import modelo.Temas;
+
 /**
  *
  * @author Usuario
@@ -27,12 +28,12 @@ public class VistaTema extends javax.swing.JFrame {
      */
     LinkedList<Temas> listaTemas;
     LinkedList<Asignaturas> Asigna;
-    
+
     public VistaTema() {
         initComponents();
-        listaTemas=new LinkedList<>();
+        listaTemas = new LinkedList<>();
         Asigna = new LinkedList<>();
-        
+
     }
 
     /**
@@ -116,50 +117,49 @@ public class VistaTema extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-       // TODO add your handling code here:
-     
+        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-       // TODO add your handling code here:
+        // TODO add your handling code here:
         ControlTema objT = new ControlTema();
-        String nombreTemas  = jTextField1.getText();
+        String nombreTemas = jTextField1.getText();
         int idAsigFT = 0;
-    
-        
-         for (int i = 0; i < Asigna.size(); i++) {
+
+        for (int i = 0; i < Asigna.size(); i++) {
             Asignaturas get = Asigna.get(i);
             String dato = String.valueOf(jComboBox1.getSelectedItem());
 
             if (dato.equals(get.getNombreAsig())) {
                 idAsigFT = get.getIdAsig();
             }
-         String nombreTema = jTextField1.getText();
-        listaTemas.add(new Temas(nombreTema));
-         Temas objp2= new Temas(nombreTema, idAsigFT);
-        
-        
-        
-        ControlTema objcc= new ControlTema();
-        boolean t = objcc.insertarTemas(objp2);
-        if(t==true){
-            JOptionPane.showMessageDialog(rootPane,"se insertaron las temas");
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"no se insertaron las temas");
-        }}
+            String nombreTema = jTextField1.getText();
+            listaTemas.add(new Temas(nombreTema));
+            Temas objp2 = new Temas(nombreTema, idAsigFT);
+
+            ControlTema objcc = new ControlTema();
+            boolean t = objcc.insertarTemas(objp2);
+            if (t == true) {
+                JOptionPane.showMessageDialog(rootPane, "se insertaron las temas");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "no se insertaron las temas");
+            }
+        }
         listaTemas.clear();
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         ControlAsignatura objcf = new ControlAsignatura();
-      Asigna = objcf.consultarAsignaturas();
+        Asigna = objcf.consultarAsignaturas();
         for (int j = 0; j < Asigna.size(); j++) {
-            Asignaturas objTe = Asigna.get (j);
+            Asignaturas objTe = Asigna.get(j);
             jComboBox1.addItem(objTe.getNombreAsig());
     }//GEN-LAST:event_formWindowOpened
     }
+
     /**
      * @param args the command line arguments
      */
@@ -205,4 +205,3 @@ public class VistaTema extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
-

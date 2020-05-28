@@ -30,7 +30,7 @@ public class ControlAsignatura {
         
     }
 
-    public LinkedList<Asignaturas> consultarAsignaturas() throws SQLException {
+    public LinkedList<Asignaturas> consultarAsignaturas()  {
 
         LinkedList<Asignaturas> la= new LinkedList<>();
         String sql="select * from asignaturas";
