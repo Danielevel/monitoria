@@ -445,31 +445,31 @@ public class VistaCurso extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        /*
+        
         String campo = jTextField2.getText();
         //String tipo = "";
         String where = "nombreCur";
         
         if(!"".equals(campo))
         {
-            where = "WHERE nombreCur = '"+ campo +"'";
+            where = "nombreCur = '"+ campo +"'";
         }
         
         DefaultTableModel modelo = new DefaultTableModel();
         //SELECT cursos.idcurso, cursos.nombreCur, asignaturas.nombreAsig, profesores.nombreP1 FROM monitorias.cursos,monitorias.asignaturas,monitorias.profesores WHERE asignaturas.idAsig = cursos.idAsigFCU and profesores.codigoP=cursos.codigoPFCU ORDER by cursos.idcurso
-        ResultSet rs = BaseDatos.getTabla("SELECT cursos.idcurso, cursos.nombreCur, asignaturas.nombreAsig, profesores.nombreP1 FROM monitorias.cursos,monitorias.asignaturas,monitorias.profesores WHERE asignaturas.idAsig = cursos.idAsigFCU and profesores.codigoP=cursos.codigoPFCU ORDER by cursos.idcurso" + " " + where);
+        ResultSet rs = BaseDatos.getTabla("SELECT cursos.idcurso, cursos.nombreCur, asignaturas.nombreAsig, profesores.nombreP1 FROM monitorias.cursos,monitorias.asignaturas,monitorias.profesores WHERE asignaturas.idAsig = cursos.idAsigFCU and profesores.codigoP=cursos.codigoPFCU AND "+ where + " ORDER by cursos.idcurso");           
         //ResultSet rs = BaseDatos.getTabla("SELECT idAsig,nombreAsig FROM monitorias.asignaturas " + where);
-        modelo.setColumnIdentifiers(new Object[]{"ID","Asignaturas"});
+        modelo.setColumnIdentifiers(new Object[]{"ID","Curso","Asignatura","Profesor"});
         
         try {
             while (rs.next()){
-                modelo.addRow(new Object[]{rs.getInt("idAsig"),rs.getString("nombreAsig")});
+                modelo.addRow(new Object[]{rs.getInt("idcurso"),rs.getString("nombreCur"),rs.getString("nombreAsig"),rs.getString("nombreP1")});
             }
             jTable1.setModel(modelo);
         } catch (Exception e) {
             System.out.println(e);
         }
-        */
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
